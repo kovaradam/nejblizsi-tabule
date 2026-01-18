@@ -1,5 +1,5 @@
 "use client";
-import { Station } from "@/data/getData";
+import { type Station } from "@/data/get-data";
 import {
   CommandDialog,
   CommandEmpty,

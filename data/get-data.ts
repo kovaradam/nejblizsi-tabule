@@ -138,8 +138,10 @@ out center tags;
   }
 
   const osm = overpassData.elements
-    .filter((e) => e.tags?.name)
-    .map((e) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .filter((e: any) => e.tags?.name)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .map((e: any) => ({
       name: e.tags.name,
       key: normalize(e.tags.name),
       lat: e.lat ?? e.center?.lat,
@@ -147,10 +149,12 @@ out center tags;
     }));
 
   const rows = stations
-    .map((station) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .map((station: any) => {
       const key = normalize(station.name);
 
-      const match = osm.find((s) => s.key === key);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const match = osm.find((s: any) => s.key === key);
 
       if (!match) {
         console.warn(`No match for station ${station.name}`);
