@@ -1,4 +1,5 @@
-"use cache";
+// Regenerates data/output.json (delete it first to force a rebuild).
+// Run with: pnpm update-data
 
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -6,7 +7,7 @@ import * as cheerio from "cheerio";
 
 import path from "path";
 
-export type Station = {
+type Station = {
   name: string;
   id: string;
   lat: number;
@@ -14,7 +15,7 @@ export type Station = {
 };
 
 function relativePath(filename: string) {
-  return path.join(fileURLToPath(import.meta.url), "..", filename);
+  return path.join(fileURLToPath(import.meta.url), "..", "..", "data", filename);
 }
 
 function normalize(s: string) {
@@ -26,7 +27,7 @@ function normalize(s: string) {
     .trim();
 }
 
-export async function getStations() {
+async function getStations() {
   // data indexing from https://provoz.spravazeleznic.cz/tabule/Pages/StationList.aspx
   const pages = Promise.all(
     [
@@ -92,7 +93,7 @@ export async function getStations() {
   );
 }
 
-export async function getData() {
+async function getData() {
   if (fs.existsSync(relativePath("output.json"))) {
     return JSON.parse(
       fs.readFileSync(relativePath("output.json"), "utf8"),
@@ -179,9 +180,4 @@ out center tags;
 
   return rows as Station[];
 }
-// const csv = [
-//   "name,id,lat,lon",
-//   ...rows.map((r) => `"${r.name}",${r.id},${r.lat},${r.lon}`),
-// ].join("\n");
-
-// fs.writeFileSync(relativePath("stations.csv"), csv);
+await getData();
