@@ -1,13 +1,15 @@
-# nejblizsi-tabule
+# Nejbližší vlaková tabule
 
-Cloudflare Worker that redirects to the departures board of the nearest Czech train station.
+Worker that serves page with link to the departures board of the nearest Czech train station.
 
-- `/` — page linking to the station closest to the visitor's IP location (`request.cf.latitude` / `longitude`). It offers a "Použít přesnou polohu" button to use the device location instead, and uses it automatically if location access was already granted
+Data is collected by scraping each train station name from [provoz.spravazeleznic.cz](https://provoz.spravazeleznic.cz/tabule/Pages/StationList.aspx) and matching it with coordinates from overpass api.
+
+- `/` — page linking to the station closest to the visitor's IP location, with action for fetching nearest station by devices location.
 - `/nearest?lat=<lat>&lon=<lon>` — redirects to the station closest to the given coordinates
 - `/api/nearest?lat=<lat>&lon=<lon>` — JSON `{ name, href }` for the closest station (used by the page)
 - `/?id=<key>` — redirects straight to the board for that station key
 
-Station data lives in `data/output.json` (scraped from provoz.spravazeleznic.cz, then matched to OSM coordinates). To regenerate it, delete the file and run `pnpm update-data`.
+Station data lives in `data/output.json`. To regenerate it, delete the file and run `pnpm update-data`.
 
 ```sh
 pnpm dev      # local dev
