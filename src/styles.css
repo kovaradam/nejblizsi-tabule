@@ -1,0 +1,163 @@
+:root {
+    color-scheme: light dark;
+    --fg: #262525;
+    --bg: #f8f7ff;
+    --muted: #666;
+    --accent: #0057b8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fg: #dcdae4;
+        --bg: #181819;
+        --muted: #999;
+        --accent: #0054c6;
+    }
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    font:
+        1rem system-ui,
+        sans-serif;
+
+    color: var(--fg);
+    background: var(--bg);
+
+    @media (prefers-color-scheme: dark) {
+        font-weight: 300;
+    }
+}
+
+main {
+    padding: 1rem;
+    padding-top: 10rem;
+    max-width: 28rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.table {
+    display: grid;
+    background-color: var(--fg);
+    color: var(--bg);
+    border-left: 1px solid currentcolor;
+    border-top: 1px solid currentcolor;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--bg);
+        color: var(--fg);
+    }
+}
+
+.table-cell {
+    font-family: monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    padding: 0.1rem 0.2rem;
+    border-bottom: 1px solid currentcolor;
+    border-right: 1px solid currentcolor;
+    font-size: 1rem;
+}
+
+a {
+    color: var(--fg);
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+#description {
+    text-align: left;
+    h2 {
+        font-size: 1rem;
+        font-weight: 500;
+        font-family: monospace;
+    }
+
+    p {
+        color: var(--muted);
+        line-height: 1.5;
+    }
+}
+
+button,
+.button {
+    font: inherit;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+        background: color-mix(var(--accent), white 10%);
+    }
+
+    &:active {
+        transform: scale(99%);
+    }
+}
+
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5em;
+    vertical-align: -0.15em;
+    border: 2px solid currentcolor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation-duration: 2.4s;
+    }
+}
+
+/* Soften status swaps (loading → result / error) instead of hard cuts. */
+#status.animate > *,
+#status.animate ~ #precise-location:not([hidden]) {
+    display: inline-block;
+    animation: swap-in 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#status.animate ~ #precise-location:not([hidden]) {
+    display: block;
+}
+
+@keyframes swap-in {
+    from {
+        opacity: 0;
+        filter: blur(2px);
+        transform: translateY(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #status.animate > *,
+    #status.animate ~ #precise-location:not([hidden]) {
+        animation-name: fade-in;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}

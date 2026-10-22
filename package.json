@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --ip 0.0.0.0 --local-protocol https",
     "deploy": "wrangler deploy",
     "types": "wrangler types",
     "typecheck": "tsc --noEmit",
@@ -15,5 +15,8 @@
     "cheerio": "^1.1.2",
     "typescript": "^5",
     "wrangler": "^4"
+  },
+  "dependencies": {
+    "hono": "^4.13.13"
   }
 }

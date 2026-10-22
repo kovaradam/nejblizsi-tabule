@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      hono:
+        specifier: ^4.13.13
+        version: 4.13.13
     devDependencies:
       '@types/node':
         specifier: ^24
@@ -489,6 +493,10 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  hono@4.13.13:
+    resolution: {integrity: sha512-CQ46U0ZkAGmbT/4UxdzzGJpacP2IeKgY4a5/tOI9AABbpOMfK739wfDXmv1usCk+3RkKj1hQy4/fjhiwa2xlrA==}
+    engines: {node: '>=16.9.0'}
+
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
 
@@ -957,6 +965,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  hono@4.13.13: {}
 
   htmlparser2@10.1.0:
     dependencies:

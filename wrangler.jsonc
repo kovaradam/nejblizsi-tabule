@@ -1,10 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "nejblizsi-tabule",
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "compatibility_date": "2026-10-21",
+  "assets": { "directory": "./public" },
+  "rules": [{ "type": "Text", "globs": ["**/*.client.js", "**/*.css"], "fallthrough": true }],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
+  },
+  "dev": {
+    "port": 3000,
   }
 }
